@@ -1,5 +1,3 @@
-
-
 #include <iostream>
 #include <sstream>
 #include <string>
@@ -24,16 +22,16 @@ int main(int argc, const char * argv[]) {
     
     string A, B;
     unordered_map<string, vector<string>> doors;
-    vector<pair<string, string>> entries;
+    unordered_set<string> prio_doors;
     for (int i = 0; i < N; ++i) {
         cin >> A >> B;
         doors[A].push_back(B);
-        entries.push_back(make_pair(A, B));
+        prio_doors.insert(A);
     }
     
     int max_depth = 0;
-    for (auto& curr : entries) {
-        dfs(doors, curr.first, 1, max_depth);
+    for (auto& key : prio_doors) {
+        dfs(doors, key, 1, max_depth);
     }
     
     cout << max_depth << endl;
